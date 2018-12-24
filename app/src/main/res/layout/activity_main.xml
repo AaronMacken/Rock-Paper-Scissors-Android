@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/backgroundarena"
+        app:rowCount="6">
+
+        <!-- Image views for the player of the game -->
+
+        <ImageView
+            android:id="@+id/p1"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10sp"
+            android:onClick="weaponClicked"
+            android:tag="1"
+            app:layout_column="0"
+            app:layout_row="5"
+            app:srcCompat="@drawable/elrock" />
+
+        <ImageView
+            android:id="@+id/p2"
+            android:layout_width="114dp"
+            android:layout_height="156dp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:onClick="weaponClicked"
+            android:tag="2"
+            app:layout_column="1"
+            app:layout_row="5"
+            app:srcCompat="@drawable/paper" />
+
+        <ImageView
+            android:id="@+id/p3"
+            android:layout_width="144dp"
+            android:layout_height="133dp"
+            android:layout_marginTop="10sp"
+            android:onClick="weaponClicked"
+            android:tag="3"
+            app:layout_column="2"
+            app:layout_row="5"
+            app:srcCompat="@drawable/scissor" />
+
+
+        <!-- Image views for the player of the game -->
+        <ImageView
+            android:id="@+id/c1"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10sp"
+            android:alpha="0"
+            android:tag="R"
+            app:layout_column="0"
+            app:layout_row="3"
+            app:srcCompat="@drawable/elrock" />
+
+        <ImageView
+            android:id="@+id/c2"
+            android:layout_width="114dp"
+            android:layout_height="156dp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:alpha="0"
+            android:tag="P"
+            app:layout_column="1"
+            app:layout_row="3"
+            app:srcCompat="@drawable/paper" />
+
+        <ImageView
+            android:id="@+id/c3"
+            android:layout_width="144dp"
+            android:layout_height="133dp"
+            android:layout_marginTop="10sp"
+            android:alpha="0"
+            android:tag="S"
+            app:layout_column="2"
+            app:layout_row="3"
+            app:srcCompat="@drawable/scissor" />
+    </android.support.v7.widget.GridLayout>
+
+    <LinearLayout
+        android:id="@+id/gameStateLayout"
+        android:layout_width="225dp"
+        android:layout_height="152dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="107dp"
+        android:layout_marginLeft="107dp"
+        android:layout_marginTop="172dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_column="1"
+
+        app:layout_row="4">
+
+        <TextView
+            android:id="@+id/gameStateMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Choose a weapon"
+            android:textAllCaps="true"
+            android:textColor="@android:color/background_light"
+            android:textSize="15dp"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/gameStateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="hideLayout"
+            android:tag="9"
+            android:text="OK" />
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
