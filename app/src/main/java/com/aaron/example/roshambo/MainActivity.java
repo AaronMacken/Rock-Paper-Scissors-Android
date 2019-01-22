@@ -1,6 +1,4 @@
 package com.aaron.example.roshambo;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import org.w3c.dom.Text;
-import java.util.Random;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,13 +17,24 @@ public class MainActivity extends AppCompatActivity {
     String userChoice = "";
     boolean gameIsActive = true;
 
+    ImageView cpuImageView1;
+    ImageView cpuImageView2;
+    ImageView cpuImageView3;
+
+    LinearLayout gsLayout;
+    TextView gsTextView;
+    Button gsButton;
+
    public void hideLayout(View v){
-       LinearLayout gsLayout = findViewById(R.id.gameStateLayout);
-       Button gsButton = findViewById(R.id.gameStateButton);
-       TextView gsTextView = findViewById(R.id.gameStateMessage);
-       ImageView c1 = findViewById(R.id.c1);
-       ImageView c2 = findViewById(R.id.c2);
-       ImageView c3 = findViewById(R.id.c3);
+       gsLayout = findViewById(R.id.gameStateLayout);
+       gsButton = findViewById(R.id.gameStateButton);
+       gsTextView = findViewById(R.id.gameStateMessage);
+
+       cpuImageView1 = findViewById(R.id.cpuImageView1);
+       cpuImageView2 = findViewById(R.id.cpuImageView2);
+       cpuImageView3 = findViewById(R.id.cpuImageView3);
+
+
        if(gameIsActive){
            if(gsButton.getText().toString().startsWith("O")){
                //Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
@@ -39,20 +46,15 @@ public class MainActivity extends AppCompatActivity {
                    String winOrLoseString = "";
 
 
-
                    if(cpuChoice.equals("1")){
-                       c1.animate().alpha(1f).setDuration(1000);
+                       cpuImageView1.animate().alpha(1f).setDuration(1000);
                    }
                    else if(cpuChoice.equals("2")){
-                       c2.animate().alpha(1f).setDuration(1000);
+                       cpuImageView2.animate().alpha(1f).setDuration(1000);
                    }
                    else if(cpuChoice.equals("3")){
-                       c3.animate().alpha(1f).setDuration(1000);
+                       cpuImageView3.animate().alpha(1f).setDuration(1000);
                    }
-
-
-
-
 
 
                    if (userChoice.equals(cpuChoice)) {
@@ -70,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
                        }else{
                            winOrLoseString = "You win!";
                        }
-                       winningString = "Paper Wins!";
+                       winningString = "Paper beats Rock!";
                    } else if(userChoice.equals("3") && cpuChoice.equals("2") || userChoice.equals("2") && cpuChoice.equals("3")) {
                       if(userChoice.equals("2")){
                           winOrLoseString = "You lose.";
                       }else{
                           winOrLoseString = "You win!";
                       }
-                       winningString = "Scissor wins!";
+                       winningString = "Scissor beats Paper!";
                    }
                    gsTextView.setText(winningString +  "\n" + winOrLoseString);
                    gsButton.setText("WOOOW (GG) ");
@@ -87,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
        }else{
            gsTextView.setText("Choose a weapon");
            gsButton.setText("OK");
-           c1.animate().alpha(0f).setDuration(0);
-           c2.animate().alpha(0f).setDuration(0);
-           c3.animate().alpha(0f).setDuration(0);
+           cpuImageView1.animate().alpha(0f).setDuration(0);
+           cpuImageView2.animate().alpha(0f).setDuration(0);
+           cpuImageView3.animate().alpha(0f).setDuration(0);
            gameIsActive = true;
        }
    }
@@ -98,48 +100,30 @@ public class MainActivity extends AppCompatActivity {
    public void weaponClicked(View v){
 
             if(gameIsActive){
-                // Get user choice
+                // Get user choice & cpu choice
                 String userChoice = v.getTag().toString();
-                // Get cpu choice
-                int cpuRNG = (ThreadLocalRandom.current().nextInt(1, 3 + 1));
-                // Switch Statement to convert CPU RNG to weapon choice.
-                switch (cpuRNG) {
-                    case 1:
-                        if (cpuRNG == 1) {
-                            cpuChoice = "1";
-                            break;
-                        }
-                    case 2:
-                        if (cpuRNG == 2) {
-                            cpuChoice = "2";
-                            break;
-                        }
-                    case 3:
-                        if (cpuRNG == 3) {
-                            cpuChoice = "3";
-                            break;
-                        }
-                }
+                cpuChoice = Integer.toString(ThreadLocalRandom.current().nextInt(1, 3 + 1));
+
                 // Get weapon Name
-                String weaponName = "";
+                String weaponName = "You chose ";
                 switch (userChoice) {
                     case "1":
-                        weaponName = "You chose rock";
+                        weaponName += "rock";
                         break;
                     case "2":
-                        weaponName = "You chose paper";
+                        weaponName += "paper";
                         break;
                     case "3":
-                        weaponName = "You chose scissors";
+                        weaponName += "scissors";
                         break;
                 }
-                LinearLayout gsLayout = findViewById(R.id.gameStateLayout);
+                gsLayout = findViewById(R.id.gameStateLayout);
                 gsLayout.setVisibility(View.VISIBLE);
 
-                TextView gsTextView = findViewById(R.id.gameStateMessage);
+                gsTextView = findViewById(R.id.gameStateMessage);
                 gsTextView.setText(weaponName);
 
-                Button gsButton = findViewById(R.id.gameStateButton);
+                gsButton = findViewById(R.id.gameStateButton);
                 gsButton.setText("Challenge");
                 gsButton.setTag(userChoice);
 
